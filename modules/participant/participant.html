@@ -1,0 +1,28 @@
+<section>
+      VmInclude:__BASE__/vmiis/Common-Code/frame/excel_v2.html
+</section>
+<script>
+    function F__ID(){
+        //-------------------------------------
+        VmInclude:__BASE__/vmiis/Common-Code/frame/excel_v2.js
+        VmInclude:__BASE__/vmiis/Common-Code/style/ease-in-out.js
+        //-------------------------------------
+        _fields="Subject ID|UID,Screening_Number,Subject_Initials,Randomisation_Number,Gender,DOB";
+        _fields+=",Submit Date|DateTime,Submitted by|Author";
+        //-------------------------------------
+        $('#D__ID').on('load',function(){ _set_req(); _request_data(); })
+        //-------------------------------------
+        _before_change=function(changes,source){
+            _process_postcode(changes,source,'Suburb',5,'Postcode',6,'State',7);
+        };
+        //-------------------------------------
+        _columns_process=function(columns){
+            columns[4]={data:'Gender',type:'dropdown',source:['---','Male','Female'],trimDropdown:false};
+            columns[5]={data:'DOB',width:120,type: 'date',format: 'DD/MM/YYYY',correctFormat:true};
+        }
+        //-------------------------------------
+    }
+</script>
+<style>
+    VmInclude:__BASE__/vmiis/Common-Code/style/default.css
+</style>
